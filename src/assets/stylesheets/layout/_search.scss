@@ -445,9 +445,6 @@ $md-toggle__search--checked:
     background-color: var(--md-default-bg-color);
     // Hack: reduce jitter
     backface-visibility: hidden;
-    transition:
-      color            250ms,
-      background-color 250ms;
     scroll-snap-type: y mandatory;
     touch-action: pan-y;
 
@@ -469,10 +466,18 @@ $md-toggle__search--checked:
     // [tablet landscape +]: Limit height to viewport
     @include break-from-device(tablet landscape) {
       max-height: 0;
+      // Override Firefox scrollbar style
+      scrollbar-width: thin;
+      scrollbar-color: var(--md-default-fg-color--lighter) transparent;
 
       // Expand in active state
       #{$md-toggle__search--checked} & {
         max-height: 75vh;
+      }
+
+      // Override Firefox scrollbar hover color
+      &:hover {
+        scrollbar-color: var(--md-accent-fg-color) transparent;
       }
 
       // Override native scrollbar styles
@@ -498,7 +503,6 @@ $md-toggle__search--checked:
 .md-search-result {
   color: var(--md-default-fg-color);
   word-break: break-word;
-  transition: color 250ms;
 
   // Search metadata
   &__meta {
